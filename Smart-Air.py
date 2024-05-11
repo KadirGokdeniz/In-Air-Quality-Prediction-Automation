@@ -5,7 +5,7 @@ import datetime
 st.title("Air-Smart Controller")
 st.subheader("Air Quality")
 
-rooms = ["Cloakroom", "Home Office", "Kitchen", "Living room", "Secondary Bedroom",None]
+rooms = ["Cloakroom", "Home Office", "Kitchen", "Living Room", "Secondary Bedroom",None]
 
 rooms_dict ={"Cloakroom":"predictions0.csv",
              "Home Office":"predictions1.csv",
