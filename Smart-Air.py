@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
+import altair as alt
 
 st.title("Air-Smart Controller")
 st.subheader("Air Quality")
@@ -72,7 +73,15 @@ if selected_room!=None:
     )
 
 if selected_item!= None:
-    st.line_chart(data[selected_item], height=400, width=2000)
+
+    chart = alt.Chart(data.reset_index()).mark_line().encode(
+            x='Timestamp:T',
+            y=alt.Y(f'{selected_item}:Q', scale=alt.Scale(domain=[data[f'{selected_item}'].min(), data[f'{selected_item}'].max()]))
+        ).properties(
+            width=800,
+            height=400
+        )
+    st.altair_chart(chart, use_container_width=True)
 
     selected_day = st.date_input("Select a date:", value=datetime.date(2022, 4, 17), min_value=datetime.date(2022, 4, 17), max_value=datetime.date(2022, 5, 29))
 
